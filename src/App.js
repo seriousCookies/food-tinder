@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Calender from "./components/Calendar";
+import Recipe from "./components/Recipe";
+import React, { useEffect } from "react";
+import { getSearch } from "./components/ApiClient";
+const App = () => {
+  useEffect(() => {
+    const getData = async () => {
+      const allData = await getSearch("dinner");
+      return allData;
+    };
+    console.log(getData());
+  }, []);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  return <Recipe />;
+};
 
 export default App;
