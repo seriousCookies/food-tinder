@@ -1,19 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Calender from "./components/Calendar";
 import Recipe from "./components/Recipe";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getSearch } from "./components/ApiClient";
 const App = () => {
+  const [recipeData, setRecipeData] = useState(null);
   useEffect(() => {
     const getData = async () => {
       const allData = await getSearch("dinner");
-      return allData;
+      setRecipeData(allData);
     };
-    console.log(getData());
+    getData();
   }, []);
-
-  return <Recipe />;
+  console.log(recipeData, "App, recipe Data");
+  return <Recipe recipeData={recipeData} />;
 };
 
 export default App;
