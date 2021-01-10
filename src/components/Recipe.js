@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Button, Modal, Card, Text } from "react-bootstrap";
+import { Button, Modal, Card, Row } from "react-bootstrap";
+import Ingredients from "./ModalComponent/Ingredients";
+import Instructions from "./ModalComponent/Instructions";
 
 const Recipe = ({ recipeData }) => {
   const [show, setShow] = useState(false);
@@ -8,7 +10,7 @@ const Recipe = ({ recipeData }) => {
   if (recipeData !== null) {
     const {
       title,
-      reqadyinMinutes,
+      readyInMinutes,
       servings,
       image,
       summary,
@@ -22,11 +24,18 @@ const Recipe = ({ recipeData }) => {
           <Card.Img variant="top" src={image} />
           <Card.Body>
             <Card.Title>{title}</Card.Title>
-            <Card.Text>hey</Card.Text>
-            <Card.Text>now</Card.Text>
-            <Button variant="primary" onClick={handleShow}>
-              Show Recipe
-            </Button>
+            <Row>
+              {" "}
+              <Card.Text>Servings: {servings} </Card.Text>
+            </Row>
+            <Row>
+              <Card.Text> Preparation time: {readyInMinutes} mins</Card.Text>
+            </Row>
+            <Row>
+              <Button variant="primary" onClick={handleShow}>
+                Show Recipe
+              </Button>
+            </Row>
           </Card.Body>
         </Card>
 
@@ -34,7 +43,10 @@ const Recipe = ({ recipeData }) => {
           <Modal.Header closeButton>
             <Modal.Title>{title}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{instructions}</Modal.Body>
+          <Modal.Body>
+            <Ingredients ingredients={ingredients} />
+            <Instructions instructions={instructions} />
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close

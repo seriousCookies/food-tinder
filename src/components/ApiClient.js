@@ -14,7 +14,7 @@ export async function getSearch(query = "dinner") {
       instructions: res.data.recipes[0].instructions,
       ingredients: res.data.recipes[0].extendedIngredients,
     };
-    console.log(res.data.recipes[0].instructions, "instructions");
+    console.log(res.data.recipes[0].readyInMinutes, "instructions");
     return {
       result,
     };
